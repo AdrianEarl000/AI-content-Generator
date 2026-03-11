@@ -1,18 +1,18 @@
 # 🚀 AI Content Generator
 
-A modern, full-stack SaaS application for generating AI-powered content. Built with Next.js 14, TypeScript, Prisma, PostgreSQL, and OpenAI.
+A modern, full-stack SaaS application for generating AI-powered content. Built with Next.js 14, TypeScript, Prisma, PostgreSQL, and Google Gemini.
 
 ![Tech Stack](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=nextdotjs)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)
 ![Prisma](https://img.shields.io/badge/Prisma-5-teal?style=flat-square&logo=prisma)
-![OpenAI](https://img.shields.io/badge/OpenAI-GPT--3.5-green?style=flat-square&logo=openai)
+![Google Gemini](https://img.shields.io/badge/Google%20Gemini-8E75B2?style=flat-square&logo=googlegemini&logoColor=white)
 
 ---
 
 ## ✨ Features
 
 - **Authentication** — Email/password + Google OAuth via NextAuth.js
-- **AI Generation** — Blog posts, social captions, marketing copy, product descriptions
+- **AI Generation** — Powered by Google Gemini (gemini-2.5-flash / 3.1-pro). Generates blog posts, social captions, marketing copy, and product descriptions
 - **Dashboard** — Usage stats, token tracking, content type breakdown
 - **History** — Paginated history with type filtering, copy & delete actions
 - **Pricing** — Free (10/mo) and Pro (unlimited) plans
@@ -23,24 +23,24 @@ A modern, full-stack SaaS application for generating AI-powered content. Built w
 
 ## 🗂 Project Structure
 
-```
+```text
 src/
 ├── app/
-│   ├── (auth)/           # Login & signup pages
+│   ├── (auth)/            # Login & signup pages
 │   │   ├── login/
 │   │   └── signup/
 │   ├── api/
-│   │   ├── auth/         # NextAuth + register endpoints
-│   │   ├── generate/     # AI generation endpoint
-│   │   ├── history/      # GET + DELETE history
-│   │   └── user/stats/   # Dashboard stats
+│   │   ├── auth/          # NextAuth + register endpoints
+│   │   ├── generate/      # AI generation endpoint
+│   │   ├── history/       # GET + DELETE history
+│   │   └── user/stats/    # Dashboard stats
 │   ├── dashboard/
-│   │   ├── page.tsx      # Overview
-│   │   ├── generate/     # Content generator
-│   │   ├── history/      # Content history
-│   │   └── pricing/      # Pricing plans
+│   │   ├── page.tsx       # Overview
+│   │   ├── generate/      # Content generator
+│   │   ├── history/       # Content history
+│   │   └── pricing/       # Pricing plans
 │   ├── layout.tsx
-│   ├── page.tsx          # Landing page
+│   ├── page.tsx           # Landing page
 │   └── globals.css
 ├── components/
 │   ├── dashboard/
@@ -51,9 +51,9 @@ src/
 │       ├── theme-provider.tsx
 │       └── toaster.tsx
 ├── lib/
-│   ├── auth.ts           # NextAuth config
-│   ├── openai.ts         # OpenAI client + prompts
-│   ├── prisma.ts         # Prisma singleton
+│   ├── auth.ts            # NextAuth config
+│   ├── gemini.ts          # Gemini AI client + prompts
+│   ├── prisma.ts          # Prisma singleton
 │   └── utils.ts
 ├── middleware.ts          # Route protection
 └── types/
@@ -69,7 +69,7 @@ prisma/
 ### 1. Clone & Install
 
 ```bash
-git clone https://github.com/your-username/ai-content-generator
+git clone [https://github.com/AdrianEarl000/AI-content-Generator.git](https://github.com/AdrianEarl000/AI-content-Generator.git)
 cd ai-content-generator
 npm install
 ```
@@ -88,17 +88,17 @@ NEXTAUTH_SECRET="generate with: openssl rand -base64 32"
 NEXTAUTH_URL="http://localhost:3000"
 GOOGLE_CLIENT_ID="..."
 GOOGLE_CLIENT_SECRET="..."
-OPENAI_API_KEY="sk-..."
+GEMINI_API_KEY="your-google-ai-studio-key""
 ```
 
 ### 3. Set Up Database
 
 ```bash
 # Push schema to database
-npm run db:push
+npx prisma db push
 
 # Or run migrations
-npm run db:migrate
+npx prisma migrate dev
 ```
 
 ### 4. Start Development Server
@@ -120,7 +120,7 @@ Visit `http://localhost:3000`
 | `NEXTAUTH_URL` | Your app URL | ✅ |
 | `GOOGLE_CLIENT_ID` | Google OAuth Client ID | ✅ |
 | `GOOGLE_CLIENT_SECRET` | Google OAuth Client Secret | ✅ |
-| `OPENAI_API_KEY` | OpenAI API Key | ✅ |
+| `GEMINI_API_KEY` | Google Gemini API Key | ✅ |
 | `STRIPE_SECRET_KEY` | Stripe Secret Key (billing) | ❌ |
 | `STRIPE_WEBHOOK_SECRET` | Stripe Webhook Secret | ❌ |
 
@@ -181,7 +181,7 @@ The Prisma schema includes:
 - **Styling**: Tailwind CSS
 - **Database**: PostgreSQL via Prisma ORM
 - **Auth**: NextAuth.js
-- **AI**: OpenAI GPT-3.5 Turbo
+- **AI**: Google Gemini API
 - **Deployment**: Vercel-ready
 
 ---
